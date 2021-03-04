@@ -38,6 +38,12 @@ then
   image="composer:2"
 fi
 
+# python
+if [[ " python pip " =~ " $command " ]]
+then
+  image="python:alpine"
+fi
+
 # ruby
 if [[ " ruby bundle bundler gem irb " =~ " $command " ]]
 then

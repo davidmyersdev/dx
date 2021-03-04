@@ -22,6 +22,7 @@ You can run `dx -h` if you forget how to use it.
 
 - `node` `npm` `npx` `yarn`
 - `php` `composer`
+- `python` `pip`
 - `ruby` `bundle` `bundler` `gem` `irb`
 
 ## Install
