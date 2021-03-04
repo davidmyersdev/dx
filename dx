@@ -2,17 +2,31 @@
 
 exit_with_usage () {
   cat << USAGE
-$0 [-h] <command>
-  -h  show usage info
+Usage
+    `basename $0` [-h][-i <image>] <command>
+
+Options
+    -h          show usage info
+    -i <image>  specify a docker image to use (e.g. node:lts-alpine)
+
+Examples
+    `basename $0` npx cowsay hello
+    `basename $0` bundle exec rails c
+    `basename $0` -i node:lts-alpine npm init
 USAGE
   exit 0
 }
 
-while getopts ':h' opt
+while getopts ':hi' opt
 do
   case $opt in
     h)
       exit_with_usage
+      ;;
+    i)
+      shift
+      image="$1"
+      shift
       ;;
   esac
 done
@@ -26,35 +40,38 @@ then
   exit_with_usage
 fi
 
-# node
-if [[ " node npm npx yarn " =~ " $command " ]]
-then
-  image="node:lts-alpine"
-fi
-
-# php
-if [[ " php composer " =~ " $command " ]]
-then
-  image="composer:2"
-fi
-
-# python
-if [[ " python pip " =~ " $command " ]]
-then
-  image="python:alpine"
-fi
-
-# ruby
-if [[ " ruby bundle bundler gem irb " =~ " $command " ]]
-then
-  image="ruby:2-alpine"
-fi
-
-# command is not yet supported
 if [ -z "$image" ]
 then
-  echo "Command '$command' is not yet supported. Consider opening an Issue or Pull Request at https://github.com/voraciousdev/dx if you think it should be added."
-  exit 0
+  # node
+  if [[ " node npm npx yarn " =~ " $command " ]]
+  then
+    image="node:lts-alpine"
+  fi
+
+  # php
+  if [[ " php composer " =~ " $command " ]]
+  then
+    image="composer:2"
+  fi
+
+  # python
+  if [[ " python pip " =~ " $command " ]]
+  then
+    image="python:alpine"
+  fi
+
+  # ruby
+  if [[ " ruby bundle bundler gem irb " =~ " $command " ]]
+  then
+    image="ruby:2-alpine"
+  fi
+
+  # command is not yet supported
+  if [ -z "$image" ]
+  then
+    echo "Command '$command' is not yet supported. Consider opening an Issue or Pull Request at https://github.com/voraciousdev/dx if you think it should be added."
+    exit 0
+  fi
 fi
 
 # run the command

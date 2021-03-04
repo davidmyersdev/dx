@@ -7,8 +7,17 @@ Execute commands in a sandbox. Docker is the only dependency.
 ## Usage
 
 ```shell
-dx [-h] <command>
-  -h  show usage info
+Usage
+    dx [-h][-i <image>] <command>
+
+Options
+    -h          show usage info
+    -i <image>  specify a docker image to use (e.g. node:lts-alpine)
+
+Examples
+    dx npx cowsay hello
+    dx bundle exec rails c
+    dx -i node:lts-alpine npm init
 ```
 
 - `dx node --version` - print the version of `node` to the console
@@ -24,6 +33,14 @@ The current directory is mounted in a Docker [volume](https://docs.docker.com/en
 - `php` `composer`
 - `python` `pip`
 - `ruby` `bundle` `bundler` `gem` `irb`
+
+### Run any command by specifying an image
+
+Specify an image with the `-i` flag.
+
+```shell
+dx -i node:lts-alpine npm init
+```
 
 ## Install
 
