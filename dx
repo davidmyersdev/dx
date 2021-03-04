@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+exit_with_usage () {
+  cat << USAGE
+$0 [-h] <command>
+  -h  show usage info
+USAGE
+  exit 0
+}
+
+while getopts ':h' opt
+do
+  case $opt in
+    h)
+      exit_with_usage
+      ;;
+  esac
+done
+
+# handle commands
+command="$1"
+
+# show usage if no command is supplied
+if [ -z "$command" ]
+then
+  exit_with_usage
+fi
+
+# node
+if [[ " node npm npx yarn " =~ " $command " ]]
+then
+  image="node:lts-alpine"
+fi
+
+# ruby
+if [[ " irb ruby " =~ " $command " ]]
+then
+  image="ruby:2-alpine"
+fi
+
+# command is not yet supported
+if [ -z "$image" ]
+then
+  echo "Command '$command' is not yet supported. Consider opening an Issue or Pull Request at https://github.com/voraciousdev/dx if you think it should be added."
+  exit 0
+fi
+
+# run the command
+docker run -it --rm -v `pwd`:/dxdir -w /dxdir "$image" "$@"
