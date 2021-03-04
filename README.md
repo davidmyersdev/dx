@@ -6,8 +6,6 @@ Execute commands in a sandbox. Docker is the only dependency.
 
 ## Usage
 
-The current directory is mounted in a Docker [volume](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) and set as the [working directory](https://docs.docker.com/engine/reference/commandline/run/#set-working-directory--w) inside the container at `/dxdir`.
-
 ```shell
 dx [-h] <command>
   -h  show usage info
@@ -17,6 +15,8 @@ dx [-h] <command>
 - `dx irb` - launch an interactive `irb` repl
 
 You can run `dx -h` if you forget how to use it.
+
+The current directory is mounted in a Docker [volume](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) and set as the [working directory](https://docs.docker.com/engine/reference/commandline/run/#set-working-directory--w) inside the container at `/dxdir`.
 
 ### Supported commands
 
