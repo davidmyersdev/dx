@@ -32,8 +32,14 @@ then
   image="node:lts-alpine"
 fi
 
+# php
+if [[ " php composer " =~ " $command " ]]
+then
+  image="composer:2"
+fi
+
 # ruby
-if [[ " irb ruby " =~ " $command " ]]
+if [[ " ruby bundle bundler gem irb " =~ " $command " ]]
 then
   image="ruby:2-alpine"
 fi

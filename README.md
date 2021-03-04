@@ -20,7 +20,8 @@ You can run `dx -h` if you forget how to use it.
 ### Supported commands
 
 - `node` `npm` `npx` `yarn`
-- `ruby` `irb`
+- `php` `composer`
+- `ruby` `bundle` `bundler` `gem` `irb`
 
 ## Install
 
