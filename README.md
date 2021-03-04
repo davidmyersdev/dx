@@ -43,6 +43,7 @@ The current directory is mounted in a Docker [volume](https://docs.docker.com/en
 
 ### Supported commands
 
+- `ffmpeg`
 - `node` `npm` `npx` `yarn`
 - `php` `composer`
 - `python` `pip`

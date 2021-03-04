@@ -53,6 +53,15 @@ fi
 # if no image is supplied, look for one that is supported
 if [ -z "$image" ]
 then
+  # ffmpeg
+  if [[ " ffmpeg " =~ " $command " ]]
+  then
+    image="jrottenberg/ffmpeg:alpine"
+
+    # the entrypoint is already set to ffmpeg for this image
+    shift
+  fi
+
   # node
   if [[ " node npm npx yarn " =~ " $command " ]]
   then
@@ -98,5 +107,5 @@ if [ -z "$shell" ]
 then
   docker run -it --rm -v `pwd`:"$internal" -w "$internal" "$image" "$@"
 else
-  docker run -it --rm -v `pwd`:"$internal" -w "$internal" "$image" sh
+  docker run -it --rm -v `pwd`:"$internal" -w "$internal" --entrypoint sh "$image"
 fi
