@@ -2,6 +2,8 @@
 
 Execute commands in a sandbox. Docker is the only dependency.
 
+![](.images/screenshot.png)
+
 ## Usage
 
 The current directory is mounted in a Docker [volume](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) and set as the [working directory](https://docs.docker.com/engine/reference/commandline/run/#set-working-directory--w) inside the container at `/dxdir`.
