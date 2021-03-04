@@ -20,14 +20,23 @@ Options
 Examples
     dx npx cowsay hello
     dx bundle exec rails c
+    dx youtube-dl https://youtu.be/LfhkoCAK6aA
     dx -i node:lts-alpine npm init
-    dx -s ruby
+    dx -s ruby script.rb
 ```
 
-### Example
+### Examples
+
+Download a YouTube video.
 
 ```shell
-dx npm init -y
+dx youtube-dl https://youtu.be/LfhkoCAK6aA
+```
+
+Launch an `irb` console.
+
+```shell
+dx irb
 ```
 
 The current directory is mounted in a Docker [volume](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) and set as the [working directory](https://docs.docker.com/engine/reference/commandline/run/#set-working-directory--w) inside the container at `/dxdir`.
@@ -38,6 +47,7 @@ The current directory is mounted in a Docker [volume](https://docs.docker.com/en
 - `php` `composer`
 - `python` `pip`
 - `ruby` `bundle` `bundler` `gem` `irb`
+- `youtube-dl`
 
 ### Run any command by specifying an image
 

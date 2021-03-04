@@ -13,8 +13,9 @@ Options
 Examples
     `basename $0` npx cowsay hello
     `basename $0` bundle exec rails c
+    `basename $0` youtube-dl https://youtu.be/LfhkoCAK6aA
     `basename $0` -i node:lts-alpine npm init
-    `basename $0` -s ruby
+    `basename $0` -s ruby script.rb
 USAGE
   exit 0
 }
@@ -36,6 +37,9 @@ do
       ;;
   esac
 done
+
+# default config
+internal="/dxdir"
 
 # handle commands
 command="$1"
@@ -73,6 +77,14 @@ then
     image="ruby:2-alpine"
   fi
 
+  # youtube-dl
+  if [[ " youtube-dl " =~ " $command " ]]
+  then
+    # https://github.com/Jeeaaasus/youtube-dl
+    image="jeeaaasustest/youtube-dl:latest"
+    internal="/downloads"
+  fi
+
   # command is not yet supported
   if [ -z "$image" ]
   then
@@ -84,7 +96,7 @@ fi
 # run the command
 if [ -z "$shell" ]
 then
-  docker run -it --rm -v `pwd`:/dxdir -w /dxdir "$image" "$@"
+  docker run -it --rm -v `pwd`:"$internal" -w "$internal" "$image" "$@"
 else
-  docker run -it --rm -v `pwd`:/dxdir -w /dxdir "$image" sh
+  docker run -it --rm -v `pwd`:"$internal" -w "$internal" "$image" sh
 fi
