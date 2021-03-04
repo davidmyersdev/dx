@@ -3,21 +3,23 @@
 exit_with_usage () {
   cat << USAGE
 Usage
-    `basename $0` [-h][-i <image>] <command>
+    `basename $0` [-hs][-i <image>] <command>
 
 Options
     -h          show usage info
     -i <image>  specify a docker image to use (e.g. node:lts-alpine)
+    -s          launch an interactive shell
 
 Examples
     `basename $0` npx cowsay hello
     `basename $0` bundle exec rails c
     `basename $0` -i node:lts-alpine npm init
+    `basename $0` -s ruby
 USAGE
   exit 0
 }
 
-while getopts ':hi' opt
+while getopts ':his' opt
 do
   case $opt in
     h)
@@ -27,6 +29,10 @@ do
       shift
       image="$1"
       shift
+      ;;
+    s)
+      shift
+      shell=1
       ;;
   esac
 done
@@ -40,6 +46,7 @@ then
   exit_with_usage
 fi
 
+# if no image is supplied, look for one that is supported
 if [ -z "$image" ]
 then
   # node
@@ -75,4 +82,9 @@ then
 fi
 
 # run the command
-docker run -it --rm -v `pwd`:/dxdir -w /dxdir "$image" "$@"
+if [ -z "$shell" ]
+then
+  docker run -it --rm -v `pwd`:/dxdir -w /dxdir "$image" "$@"
+else
+  docker run -it --rm -v `pwd`:/dxdir -w /dxdir "$image" sh
+fi

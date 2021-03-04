@@ -4,26 +4,31 @@ Execute commands in a sandbox. Docker is the only dependency.
 
 ![](.images/screenshot.png)
 
-## Usage
+## Use
+
+You can run `dx -h` for usage info and examples.
 
 ```shell
 Usage
-    dx [-h][-i <image>] <command>
+    dx [-hs][-i <image>] <command>
 
 Options
     -h          show usage info
     -i <image>  specify a docker image to use (e.g. node:lts-alpine)
+    -s          launch an interactive shell
 
 Examples
     dx npx cowsay hello
     dx bundle exec rails c
     dx -i node:lts-alpine npm init
+    dx -s ruby
 ```
 
-- `dx node --version` - print the version of `node` to the console
-- `dx irb` - launch an interactive `irb` repl
+### Example
 
-You can run `dx -h` if you forget how to use it.
+```shell
+dx npm init -y
+```
 
 The current directory is mounted in a Docker [volume](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) and set as the [working directory](https://docs.docker.com/engine/reference/commandline/run/#set-working-directory--w) inside the container at `/dxdir`.
 
@@ -40,6 +45,14 @@ Specify an image with the `-i` flag.
 
 ```shell
 dx -i node:lts-alpine npm init
+```
+
+### Run multiple commands by launching an interactive shell
+
+Launch an interactive shell for a given command with the `-s` flag.
+
+```shell
+dx -s composer
 ```
 
 ## Install
