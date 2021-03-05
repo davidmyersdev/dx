@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 
+# default config
+destination="/dxdir"
+extras=()
+
 exit_with_usage () {
   cat << USAGE
 Usage
-    `basename $0` [-hs][-i <image>] <command>
+    `basename $0` [-hs][-i <image>][-p <port>] <command>
 
 Options
     -h          show usage info
     -i <image>  specify a docker image to use (e.g. node:lts-alpine)
+    -p <port>   specify port binding (as host:guest) for docker (e.g. 5000:80)
     -s          launch an interactive shell
 
 Examples
@@ -15,12 +20,13 @@ Examples
     `basename $0` bundle exec rails c
     `basename $0` youtube-dl https://youtu.be/LfhkoCAK6aA
     `basename $0` -i node:lts-alpine npm init
+    `basename $0` -p 5000:5000 npx serve .
     `basename $0` -s ruby script.rb
 USAGE
   exit 0
 }
 
-while getopts ':his' opt
+while getopts ':hips' opt
 do
   case $opt in
     h)
@@ -31,15 +37,17 @@ do
       image="$1"
       shift
       ;;
+    p)
+      shift
+      extras+=( "-p" "$1" )
+      shift
+      ;;
     s)
       shift
       shell=1
       ;;
   esac
 done
-
-# default config
-destination="/dxdir"
 
 # handle commands
 command="$1"
@@ -105,7 +113,7 @@ fi
 # run the command
 if [ -z "$shell" ]
 then
-  docker run -it --rm -v `pwd`:"$destination" -w "$destination" "$image" "$@"
+  docker run -it --rm -v `pwd`:"$destination" -w "$destination" "${extras[@]}" "$image" "$@"
 else
-  docker run -it --rm -v `pwd`:"$destination" -w "$destination" --entrypoint sh "$image"
+  docker run -it --rm -v `pwd`:"$destination" -w "$destination" "${extras[@]}" --entrypoint sh "$image"
 fi

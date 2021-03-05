@@ -4,6 +4,18 @@ Execute commands in a sandbox. Docker is the only dependency.
 
 ![](.images/screenshot.png)
 
+## Install
+
+Installation is quick.
+
+```shell
+# clone the repo
+git clone https://github.com/voraciousdev/dx.git
+
+# make it available anywhere
+mv ./dx/dx /usr/local/bin
+```
+
 ## Use
 
 You can run `dx -h` for usage info and examples.
@@ -50,6 +62,15 @@ The current directory is mounted in a Docker [volume](https://docs.docker.com/en
 - `ruby` `bundle` `bundler` `gem` `irb`
 - `youtube-dl`
 
+### Expose a port to the host
+
+Expose a port to the host with the `-p` flag.
+
+```shell
+# just like a docker port binding (host:guest)
+dx -p 5000:5000 npx serve .
+```
+
 ### Run any command by specifying an image
 
 Specify an image with the `-i` flag.
@@ -64,16 +85,4 @@ Launch an interactive shell for a given command with the `-s` flag.
 
 ```shell
 dx -s composer
-```
-
-## Install
-
-Installation is quick.
-
-```shell
-# clone the repo
-git clone https://github.com/voraciousdev/dx.git
-
-# make it available anywhere
-mv ./dx/dx /usr/local/bin
 ```
