@@ -39,7 +39,7 @@ do
 done
 
 # default config
-internal="/dxdir"
+destination="/dxdir"
 
 # handle commands
 command="$1"
@@ -91,7 +91,7 @@ then
   then
     # https://github.com/Jeeaaasus/youtube-dl
     image="jeeaaasustest/youtube-dl:latest"
-    internal="/downloads"
+    destination="/downloads"
   fi
 
   # command is not yet supported
@@ -105,7 +105,7 @@ fi
 # run the command
 if [ -z "$shell" ]
 then
-  docker run -it --rm -v `pwd`:"$internal" -w "$internal" "$image" "$@"
+  docker run -it --rm -v `pwd`:"$destination" -w "$destination" "$image" "$@"
 else
-  docker run -it --rm -v `pwd`:"$internal" -w "$internal" --entrypoint sh "$image"
+  docker run -it --rm -v `pwd`:"$destination" -w "$destination" --entrypoint sh "$image"
 fi
