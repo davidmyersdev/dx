@@ -22,11 +22,12 @@ You can run `dx -h` for usage info and examples.
 
 ```shell
 Usage
-    dx [-hs][-i <image>] <command>
+    dx [-hs][-i <image>][-p <port>] <command>
 
 Options
     -h          show usage info
     -i <image>  specify a docker image to use (e.g. node:lts-alpine)
+    -p <port>   specify port binding (as host:guest) for docker (e.g. 5000:80)
     -s          launch an interactive shell
 
 Examples
@@ -34,6 +35,7 @@ Examples
     dx bundle exec rails c
     dx youtube-dl https://youtu.be/LfhkoCAK6aA
     dx -i node:lts-alpine npm init
+    dx -p 5000:5000 npx serve .
     dx -s ruby script.rb
 ```
 
