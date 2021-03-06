@@ -1,12 +1,12 @@
 # dx
 
-Execute commands in a sandbox. Docker is the only dependency.
+Safely execute commands in the current directory with Docker. Forget about dependencies.
 
 ![](.images/screenshot.png)
 
 ## Install
 
-Installation is quick.
+Installation is quick. The only dependency is [Docker](https://www.docker.com/).
 
 ```shell
 # clone the repo
@@ -41,16 +41,16 @@ Examples
 
 ### Examples
 
-Download a YouTube video.
+Download a YouTube video with `youtube-dl`.
 
 ```shell
 dx youtube-dl https://youtu.be/LfhkoCAK6aA
 ```
 
-Launch an `irb` console.
+Convert a video to a GIF with `ffmpeg`.
 
 ```shell
-dx irb
+dx ffmpeg -i input.mp4 -loop 0 -c:v gif -f gif output.gif
 ```
 
 The current directory is mounted in a Docker [volume](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) and set as the [working directory](https://docs.docker.com/engine/reference/commandline/run/#set-working-directory--w) inside the container at `/dxdir`.
