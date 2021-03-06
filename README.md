@@ -35,8 +35,8 @@ Examples
     dx bundle exec rails c
     dx youtube-dl https://youtu.be/LfhkoCAK6aA
     dx -i node:lts-alpine npm init
-    dx -p 5000:5000 npx serve .
-    dx -s ruby script.rb
+    dx -p 5001:5001 dotnet run
+    dx -s composer
 ```
 
 ### Examples
@@ -67,6 +67,14 @@ The current directory is mounted in a Docker [volume](https://docs.docker.com/en
 - `ruby` `bundle` `bundler` `gem` `irb`
 - `youtube-dl`
 
+#### Run any command by specifying a Docker image
+
+If a command is not yet supported, you can still use `dx` by specifying a Docker image to use with the `-i` flag.
+
+```shell
+dx -i node:lts-alpine npm init
+```
+
 ### Expose a port to the host
 
 Expose a port to the host with the `-p` flag.
@@ -74,14 +82,6 @@ Expose a port to the host with the `-p` flag.
 ```shell
 # just like a docker port binding (host:guest)
 dx -p 5000:5000 npx serve .
-```
-
-### Run any command by specifying an image
-
-Specify an image with the `-i` flag.
-
-```shell
-dx -i node:lts-alpine npm init
 ```
 
 ### Run multiple commands by launching an interactive shell

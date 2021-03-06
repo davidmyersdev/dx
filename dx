@@ -20,8 +20,8 @@ Examples
     `basename $0` bundle exec rails c
     `basename $0` youtube-dl https://youtu.be/LfhkoCAK6aA
     `basename $0` -i node:lts-alpine npm init
-    `basename $0` -p 5000:5000 npx serve .
-    `basename $0` -s ruby script.rb
+    `basename $0` -p 5001:5001 dotnet run
+    `basename $0` -s composer
 USAGE
   exit 0
 }
