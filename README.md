@@ -59,6 +59,7 @@ The current directory is mounted in a Docker [volume](https://docs.docker.com/en
 
 - `cargo`
 - `deno`
+- `dotnet`
 - `ffmpeg`
 - `node` `npm` `npx` `yarn`
 - `php` `composer`

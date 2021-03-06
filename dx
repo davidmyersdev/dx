@@ -71,6 +71,12 @@ then
     shift
   fi
 
+  # dotnet
+  if [[ " dotnet " =~ " $command " ]]
+  then
+    image="mcr.microsoft.com/dotnet/sdk:5.0-alpine"
+  fi
+
   # ffmpeg
   if [[ " ffmpeg " =~ " $command " ]]
   then
