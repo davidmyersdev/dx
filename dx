@@ -94,6 +94,12 @@ then
     image="ruby:2-alpine"
   fi
 
+  # rust
+  if [[ " cargo " =~ " $command " ]]
+  then
+    image="rust:alpine"
+  fi
+
   # youtube-dl
   if [[ " youtube-dl " =~ " $command " ]]
   then
