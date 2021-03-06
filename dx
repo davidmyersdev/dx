@@ -61,12 +61,22 @@ fi
 # if no image is supplied, look for one that is supported
 if [ -z "$image" ]
 then
+  # deno
+  if [[ " deno " =~ " $command " ]]
+  then
+    image="hayd/deno:alpine"
+    destination="/app"
+
+    # the entrypoint is already set for this image
+    shift
+  fi
+
   # ffmpeg
   if [[ " ffmpeg " =~ " $command " ]]
   then
     image="jrottenberg/ffmpeg:alpine"
 
-    # the entrypoint is already set to ffmpeg for this image
+    # the entrypoint is already set for this image
     shift
   fi
 
