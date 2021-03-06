@@ -57,6 +57,8 @@ The current directory is mounted in a Docker [volume](https://docs.docker.com/en
 
 ### Supported commands
 
+This is a (growing) list of supported commands to run as `dx <command>`.
+
 - `cargo`
 - `deno`
 - `dotnet`
