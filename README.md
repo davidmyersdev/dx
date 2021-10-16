@@ -6,7 +6,7 @@ Safely execute commands in the current directory with Docker. Forget about depen
 
 ## Install
 
-Installation is quick. The only dependency is [Docker](https://www.docker.com/).
+The only dependency is [Docker](https://www.docker.com/).
 
 ```shell
 # clone the repo
